@@ -1,0 +1,5 @@
+example:
+    begin_at: '2022-03-25T15:04:43.345Z'
+    end_at: '2022-03-25T15:04:43.345Z'
+    movie_id: 1
+    hall_id: 1

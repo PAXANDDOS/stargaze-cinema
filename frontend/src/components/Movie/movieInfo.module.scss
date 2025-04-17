@@ -1,0 +1,19 @@
+.movieInfoBlock {
+    @include flex-column;
+    width: fit-content;
+    margin: 10px 0;
+    font-weight: 400;
+
+    .movieInfoTitle {
+        font-size: 16px;
+        color: $dark-5;
+        font-weight: inherit;
+    }
+
+    .movieInfoContent {
+        font-size: 18px;
+        line-height: 18px;
+        color: $dark-2;
+        font-weight: inherit;
+    }
+}

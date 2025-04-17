@@ -1,0 +1,12 @@
+.authPage {
+    @include grid-center;
+    width: 100vw;
+    height: calc(100vh - 64px);
+    z-index: 1;
+
+    form {
+        @include flex-column;
+        width: 400px;
+        margin: 20px 0;
+    }
+}

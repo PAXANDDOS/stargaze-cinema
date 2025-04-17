@@ -1,0 +1,5 @@
+description: Signed up successfully
+content:
+    application/json:
+        schema:
+            $ref: '../schemas/user.yaml'

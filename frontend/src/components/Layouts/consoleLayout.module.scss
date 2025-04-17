@@ -1,0 +1,44 @@
+.layout {
+    @include flex-column;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 1;
+
+    .head {
+        @include flex-row;
+        align-items: center;
+        width: 100%;
+        height: 64px;
+        padding: 0 16px;
+        background: white;
+
+        a {
+            @include grid-center;
+        }
+
+        span {
+            font-size: large;
+            margin-left: 16px;
+        }
+
+        button {
+            margin-left: 10px;
+            color: $brand-blue;
+            font-size: 12px;
+        }
+    }
+
+    .body {
+        @include flex-row;
+        width: 100%;
+        height: calc(100% - 64px);
+
+        .sidebar {
+            @include flex-column;
+            width: 320px;
+            height: 100%;
+            padding: 16px;
+            background: $white-1;
+        }
+    }
+}

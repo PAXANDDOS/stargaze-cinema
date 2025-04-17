@@ -1,0 +1,5 @@
+example:
+    name: John
+    email: bestguy@mail.com
+    password: securepass
+    password_confirmation: securepass

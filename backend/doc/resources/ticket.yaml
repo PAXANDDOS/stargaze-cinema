@@ -1,0 +1,93 @@
+Ticket:
+    get:
+        tags:
+            - Ticket
+        summary: Get all tickets
+        security:
+            - BearerAuth: []
+        responses:
+            200:
+                description: List of tickets
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "../schemas/ticket.yaml"
+    post:
+        tags:
+            - Ticket
+        summary: Create ticket
+        security:
+            - BearerAuth: []
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/ticket.yaml"
+                            - $ref: "../schemas/required/ticket.yaml"
+                            - $ref: "../examples/ticket.yaml"
+        responses:
+            201:
+                $ref: "../responses/ticket.yaml"
+                description: Ticket created
+
+TicketWithID:
+    get:
+        tags:
+            - Ticket
+        summary: Get ticket by ID
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            200:
+                $ref: "../responses/ticket.yaml"
+                description: Ticket found
+    patch:
+        tags:
+            - Ticket
+        summary: Update ticket
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/ticket.yaml"
+                            - $ref: "../examples/ticket.yaml"
+        responses:
+            201:
+                $ref: "../responses/ticket.yaml"
+                description: Ticket updated
+    delete:
+        tags:
+            - Ticket
+        summary: Delete ticket
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            204:
+                description: Ticket deleted

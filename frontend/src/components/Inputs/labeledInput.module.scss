@@ -1,0 +1,25 @@
+.labeledInput {
+    @include flex-column;
+    width: 100%;
+    font-size: medium;
+    margin-top: 6px;
+    margin-bottom: 10px;
+    input {
+        height: 40px;
+        font-size: inherit;
+        background: $white-1;
+        border-radius: 6px;
+        border: 1px solid $dark-8;
+        padding: 0 8px;
+        margin-top: 4px;
+
+        @include transition;
+        &:hover {
+            border: 1px solid $white-0;
+        }
+
+        &:focus {
+            border: 1px solid $brand-blue;
+        }
+    }
+}

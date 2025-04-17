@@ -1,0 +1,18 @@
+<h1>Welcome {{ user.name }}!</h1>
+
+<style>
+*{
+    font-family: Poppins, Arial;
+}
+</style>
+
+<p>
+    You recently bought a ticket for the {{ movie.title }} movie.<br/>
+    Here it is:
+    <ul>
+        <li>Your seat: №{{ place }}</li>
+        <li>Hall: {{ hall.name }}</li>
+        <li>Begins at: {{ beginAt }}</li>
+        <li>Ends at: {{ endAt }}</li>
+    </ul>
+</p>

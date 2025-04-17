@@ -1,0 +1,12 @@
+example:
+    title: Avengers
+    synopsis: Watch Avengers Now!
+    poster: https://cdn.stargazecinema/movies/Avengers/poster.png
+    price: 10.00
+    year: 2012
+    runtime: 132
+    rating: 'PEGI 12'
+    language_id: 1
+    country_ids: [1,2]
+    genre_ids: [1,2]
+    director_ids: [1,2]

@@ -1,0 +1,124 @@
+version: "3.9"
+
+networks:
+    api-network:
+        name: api-network
+        driver: bridge
+
+services:
+    app:
+        container_name: ${APP_NAME:-symfony}
+        image: ${APP_NAME:-symfony}:${APP_VERSION:-latest}
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
+            target: development
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www/stargaze:rw
+        networks:
+            - api-network
+        depends_on:
+            postgres:
+                condition: service_healthy
+            rabbitmq:
+                condition: service_healthy
+
+    postgres:
+        container_name: postgres
+        image: postgres:14.3-alpine3.15
+        ports:
+            - 5432:5432
+        restart: always
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB:-database}
+            POSTGRES_USER: ${POSTGRES_USER:-myuser}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mypassword}
+        healthcheck:
+            test: [CMD-SHELL, pg_isready, -U, $POSTGRES_USER, -d, $POSTGRES_DB]
+            interval: 30s
+            timeout: 60s
+            retries: 5
+            start_period: 80s
+        volumes:
+            - pg-storage:/var/lib/postgresql/data:rw
+        networks:
+            - api-network
+
+    rabbitmq:
+        container_name: rabbitmq
+        image: rabbitmq:3.10.2-management-alpine
+        ports:
+            - 5672:5672
+            - 15672:15672
+        restart: always
+        healthcheck:
+            test: "rabbitmq-diagnostics -q ping"
+            interval: 30s
+            timeout: 60s
+            retries: 5
+            start_period: 80s
+        volumes:
+            - rabbitmq-storage:/var/lib/rabbitmq:rw
+            - ./docker/rabbitmq:/etc/rabbitmq:ro
+        networks:
+            - api-network
+
+    minio:
+        container_name: minio
+        image: minio/minio:RELEASE.2022-05-23T18-45-11Z
+        entrypoint: sh
+        command: >
+            -c 'mkdir -p /data/${MINIO_BUCKET:-stargazecinema} &&
+            minio server --address 0.0.0.0:9000 --console-address ":9001" /data'
+        ports:
+            - 127.0.0.1:9000:9000
+            - 9001:9001
+        environment:
+            MINIO_ROOT_USER: ${MINIO_ROOT_USER:-mykey}
+            MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-mysecretkey}
+        volumes:
+            - minio-storage:/data:rw
+        healthcheck:
+            test: [CMD, curl, -f, http://localhost:9000/minio/health/live]
+            interval: 30s
+            timeout: 20s
+            retries: 3
+        restart: on-failure
+        networks:
+            - api-network
+
+    mailhog:
+        container_name: mailhog
+        image: mailhog/mailhog:v1.0.1
+        logging:
+            driver: none
+        ports:
+            - 1025:1025
+            - 8025:8025
+        networks:
+            - api-network
+
+    swagger-ui:
+        container_name: swagger-ui
+        image: swaggerapi/swagger-ui:v4.11.1
+        ports:
+            - 8080:8080
+        volumes:
+            - ./doc:/usr/share/nginx/html/doc:ro
+        environment:
+            API_URL: doc/openapi.yaml
+        networks:
+            - api-network
+
+volumes:
+    pg-storage:
+        name: pg-storage
+        driver: local
+    rabbitmq-storage:
+        name: rabbitmq-storage
+        driver: local
+    minio-storage:
+        name: minio-storage
+        driver: local

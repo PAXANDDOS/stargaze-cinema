@@ -1,0 +1,5 @@
+required:
+    - name
+    - email
+    - password
+    - password_confirmation

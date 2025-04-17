@@ -1,0 +1,20 @@
+.labeledSelect {
+    @include flex-column;
+    width: 100%;
+    font-size: medium;
+    margin-top: 6px;
+    margin-bottom: 10px;
+
+    select {
+        width: fit-content;
+        border: 1px solid $dark-8;
+        font-size: inherit;
+        border-radius: 4px;
+        margin-top: 4px;
+        padding: 4px;
+        background: $white-1;
+        &:focus {
+            border-color: $brand-blue;
+        }
+    }
+}

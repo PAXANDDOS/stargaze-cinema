@@ -1,0 +1,28 @@
+parameters:
+    locale: "en"
+    cache_adapter: cache.adapter.apcu
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\:
+        resource: "../src/"
+        exclude:
+            - ../src/DependencyInjection/
+            - ../src/Entity/
+            - ../src/Kernel.php
+
+    App\Service\S3Service:
+        arguments:
+            - '@App\Factory\S3ClientFactory'
+            - "%env(MINIO_BUCKET)%"
+
+    App\Factory\S3ClientFactory:
+        arguments:
+            - "%env(MINIO_REGION)%"
+            - "%env(MINIO_ROOT_USER)%"
+            - "%env(MINIO_ROOT_PASSWORD)%"
+            - "%env(MINIO_ENDPOINT_URL)%"

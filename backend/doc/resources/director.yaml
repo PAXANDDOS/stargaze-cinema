@@ -1,0 +1,93 @@
+Director:
+    get:
+        tags:
+            - Director
+        summary: Get all directors
+        security:
+            - BearerAuth: []
+        responses:
+            200:
+                description: List of directors
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "../schemas/director.yaml"
+    post:
+        tags:
+            - Director
+        summary: Create director
+        security:
+            - BearerAuth: []
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/director.yaml"
+                            - $ref: "../schemas/required/director.yaml"
+                            - $ref: "../examples/director.yaml"
+        responses:
+            201:
+                $ref: "../responses/director.yaml"
+                description: Director created
+
+DirectorWithID:
+    get:
+        tags:
+            - Director
+        summary: Get director by ID
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            200:
+                $ref: "../responses/director.yaml"
+                description: Director found
+    patch:
+        tags:
+            - Director
+        summary: Update director
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/director.yaml"
+                            - $ref: "../examples/director.yaml"
+        responses:
+            201:
+                $ref: "../responses/director.yaml"
+                description: Director updated
+    delete:
+        tags:
+            - Director
+        summary: Delete director
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            204:
+                description: Director deleted

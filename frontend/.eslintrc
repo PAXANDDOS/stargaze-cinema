@@ -1,0 +1,39 @@
+{
+    "root": true,
+    "env": {
+        "es2022": true,
+        "browser": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:prettier/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 13,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "plugins": ["react", "@typescript-eslint"],
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off",
+        "no-case-declarations": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "quotes": ["warn", "single"]
+    },
+    "ignorePatterns": [".git", ".husky", "node_modules/**", "public/**", "dist/**", "dist-ssr/**"],
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "18.1.0"
+        }
+    }
+}

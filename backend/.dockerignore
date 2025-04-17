@@ -1,0 +1,6 @@
+config/jwt/*
+tests/_output/*
+tests/_support/_generated/*
+var/*
+vendor
+.php-cs-fixer.cache

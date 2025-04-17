@@ -1,0 +1,4 @@
+required:
+    - name
+    - capacity
+    - type

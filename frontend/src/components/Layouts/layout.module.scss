@@ -1,0 +1,30 @@
+.layout {
+    @include flex-center;
+    flex-direction: row;
+    width: 100vw;
+    height: 64px;
+    background: white;
+    box-shadow: $shadow-lighten;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    a {
+        font-size: inherit;
+        font-weight: 500;
+        color: $accent-header;
+        margin: 0 10px;
+    }
+
+    button {
+        font-size: inherit;
+        font-weight: 500;
+        color: $accent-header;
+        margin: 0 10px;
+
+        &:hover {
+            opacity: 1;
+            color: $danger-red;
+        }
+    }
+}

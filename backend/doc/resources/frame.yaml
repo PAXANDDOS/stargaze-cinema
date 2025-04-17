@@ -1,0 +1,69 @@
+Frame:
+    get:
+        tags:
+            - Frame
+        summary: Get all frames
+        security:
+            - BearerAuth: []
+        responses:
+            200:
+                description: List of frames
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "../schemas/frame.yaml"
+    post:
+        tags:
+            - Frame
+        summary: Create frame
+        security:
+            - BearerAuth: []
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/frame.yaml"
+                            - $ref: "../schemas/required/frame.yaml"
+                            - $ref: "../examples/frame.yaml"
+        responses:
+            201:
+                $ref: "../responses/frame.yaml"
+                description: Frame created
+
+FrameWithID:
+    get:
+        tags:
+            - Frame
+        summary: Get frame by ID
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            200:
+                $ref: "../responses/frame.yaml"
+                description: Frame found
+    delete:
+        tags:
+            - Frame
+        summary: Delete frame
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            204:
+                description: Frame deleted

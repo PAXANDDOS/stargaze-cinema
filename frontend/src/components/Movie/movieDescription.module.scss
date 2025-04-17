@@ -1,0 +1,29 @@
+.movieDesc {
+    @include flex-row;
+    width: calc(100% - 120px);
+    height: fit-content;
+
+    .movieDescContent {
+        @include flex-column;
+        width: calc(100% - 230px);
+        height: fit-content;
+        padding-right: 40px;
+
+        h2 {
+            font-size: 28px;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 18px;
+            word-wrap: normal;
+            margin: 10px 0;
+        }
+    }
+
+    .movieDescInfo {
+        @include flex-column;
+        width: 230px;
+        height: fit-content;
+    }
+}

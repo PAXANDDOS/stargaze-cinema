@@ -1,0 +1,12 @@
+type: object
+properties:
+    id:
+        type: integer
+    movie_id:
+        type: integer
+    image:
+        type: string
+    created_at:
+        type: string
+    updated_at:
+        type: string

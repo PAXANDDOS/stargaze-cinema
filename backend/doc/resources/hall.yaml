@@ -1,0 +1,93 @@
+Hall:
+    get:
+        tags:
+            - Hall
+        summary: Get all halls
+        security:
+            - BearerAuth: []
+        responses:
+            200:
+                description: List of halls
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "../schemas/hall.yaml"
+    post:
+        tags:
+            - Hall
+        summary: Create hall
+        security:
+            - BearerAuth: []
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/hall.yaml"
+                            - $ref: "../schemas/required/hall.yaml"
+                            - $ref: "../examples/hall.yaml"
+        responses:
+            201:
+                $ref: "../responses/hall.yaml"
+                description: Hall created
+
+HallWithID:
+    get:
+        tags:
+            - Hall
+        summary: Get hall by ID
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            200:
+                $ref: "../responses/hall.yaml"
+                description: Hall found
+    patch:
+        tags:
+            - Hall
+        summary: Update hall
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/hall.yaml"
+                            - $ref: "../examples/hall.yaml"
+        responses:
+            201:
+                $ref: "../responses/hall.yaml"
+                description: Hall updated
+    delete:
+        tags:
+            - Hall
+        summary: Delete hall
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            204:
+                description: Hall deleted

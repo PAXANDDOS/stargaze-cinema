@@ -1,0 +1,74 @@
+.table {
+    width: 100%;
+    margin-bottom: 30px;
+
+    .head {
+        @include grid;
+        width: 100%;
+        height: fit-content;
+
+        .headcell {
+            @include grid-center;
+            @include unselectable;
+            width: 100%;
+            height: 40px;
+            background: $dark-8;
+            overflow: hidden;
+
+            &:first-child {
+                border-top-left-radius: 8px;
+            }
+            &:last-of-type {
+                border-top-right-radius: 8px;
+            }
+        }
+    }
+
+    .body {
+        @include grid;
+        width: 100%;
+        height: fit-content;
+
+        .bodycell {
+            @include flex-row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 40px;
+            background: $white-0;
+            overflow: hidden;
+
+            &[x-name='long'] {
+                padding: 0 8px;
+                justify-content: flex-start;
+            }
+
+            span {
+                white-space: nowrap;
+            }
+
+            button {
+                width: 100%;
+                height: 100%;
+                svg {
+                    fill: $dark-4;
+                }
+                &:hover {
+                    svg {
+                        fill: $brand-blue;
+                    }
+                    &:last-child {
+                        svg {
+                            fill: $danger-red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .pulseAnimation {
+        background: $white-0;
+        @include pulse;
+    }
+}

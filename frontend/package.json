@@ -1,0 +1,90 @@
+{
+    "name": "stargaze-cinema-react",
+    "version": "1.0.0",
+    "private": true,
+    "license": "ISC",
+    "author": "Paul Litovka",
+    "description": "Website for a Stargaze Cinema network",
+    "scripts": {
+        "prepare": "husky install",
+        "start:development": "vite dev",
+        "start:production": "vite preview",
+        "build": "pnpm typecheck && pnpm lint && vite build",
+        "typecheck": "tsc --noEmit -p tsconfig.json",
+        "format": "prettier --loglevel warn --write src",
+        "lint": "eslint src --quiet --fix --ext js,ts,tsx"
+    },
+    "dependencies": {
+        "@tanstack/react-location": "^3.7.4",
+        "axios": "^0.27.2",
+        "dayjs": "^1.11.2",
+        "js-cookie": "^3.0.1",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0",
+        "react-helmet": "^6.1.0",
+        "react-query": "^3.39.0",
+        "swiper": "^8.1.5"
+    },
+    "devDependencies": {
+        "@types/js-cookie": "^3.0.2",
+        "@types/node": "^17.0.35",
+        "@types/react": "^18.0.9",
+        "@types/react-dom": "^18.0.5",
+        "@types/react-helmet": "^6.1.5",
+        "@typescript-eslint/eslint-plugin": "5.26.0",
+        "@typescript-eslint/parser": "^5.26.0",
+        "@vitejs/plugin-react": "^1.3.2",
+        "eslint": "8.16.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.30.0",
+        "eslint-plugin-react-hooks": "^4.5.0",
+        "husky": "^8.0.1",
+        "prettier": "^2.6.2",
+        "sass": "^1.52.1",
+        "typescript": "^4.7.2",
+        "vite": "^2.9.9"
+    },
+    "lint-staged": {
+        "src/**/*.{js,ts,tsx}": [
+            "prettier --loglevel warn --write",
+            "eslint --quiet --fix"
+        ],
+        "src/**/*.{css,scss}": [
+            "prettier --loglevel warn --write"
+        ]
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.nixdev.co/litovka/stargaze-cinema-react.git"
+    },
+    "bugs": {
+        "url": "https://gitlab.nixdev.co/litovka/stargaze-cinema-react/issues"
+    },
+    "homepage": "https://gitlab.nixdev.co/litovka/stargaze-cinema-react#readme",
+    "keywords": [
+        "react",
+        "vite",
+        "sass",
+        "typescript",
+        "vitejs",
+        "reactjs",
+        "nodejs",
+        "eslint"
+    ],
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}

@@ -1,0 +1,45 @@
+.toastContainer {
+    @include unselectable;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    pointer-events: none;
+    .toast {
+        @include flex-row;
+        align-items: center;
+        @include pop-up(0.16s);
+        width: 320px;
+        max-width: 400px;
+        min-height: 50px;
+        background: $white-2;
+        border-radius: 10px;
+        box-shadow: $shadow-darken;
+        margin: 0 20px 20px 0;
+        padding: 6px 10px;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        pointer-events: all;
+
+        svg {
+            width: 24px;
+            fill: $brand-blue;
+            path {
+                stroke: $brand-blue;
+            }
+            margin-right: 14px;
+        }
+        span {
+            width: calc(100% - 24px);
+            color: $dark-2;
+        }
+        .spinAnimation {
+            @include spin(350ms);
+        }
+    }
+    .popDownAnimation {
+        @include pop-down(160ms);
+    }
+}

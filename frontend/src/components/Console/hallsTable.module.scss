@@ -1,0 +1,14 @@
+@mixin grid {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr 0.5fr 1fr 1.3fr 1.3fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: '. . . . . . .';
+    grid-auto-flow: row;
+    justify-content: space-between;
+    justify-items: stretch;
+    align-items: stretch;
+    place-items: center;
+    gap: 2px;
+}
+
+@import './table.scss';

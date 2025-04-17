@@ -1,0 +1,4 @@
+required:
+    - place
+    - user_id
+    - session_id

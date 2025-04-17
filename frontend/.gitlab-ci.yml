@@ -1,0 +1,76 @@
+image: $CI_GROUP_DOCKER
+
+services:
+    - name: $CI_GROUP_DOCKER_DIND
+      alias: docker
+
+stages:
+    - build
+    - release
+    - publish
+
+variables:
+    APP_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    APP_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+    AWS_ECR_IMAGE: $AWS_ECR_REGISTRY/$AWS_ECR_REPOSITORY:latest
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ''
+
+.load_image: &load_image
+    - docker load -i build.tar
+
+.require_image: &require_image
+    needs:
+        - job: Build images
+          artifacts: true
+
+before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - cp .env.example .env
+    - docker version
+
+Build images:
+    stage: build
+    tags:
+        - docker
+    script:
+        - docker build -f docker/Dockerfile -t $APP_IMAGE --build-arg API_URL=$AWS_EB_INSTANCE_URL:8000/api .
+        - docker save -o build.tar $APP_IMAGE
+    needs: []
+    artifacts:
+        paths:
+            - build.tar
+
+Release images:
+    stage: release
+    when: on_success
+    tags:
+        - docker
+    script:
+        - *load_image
+        - docker tag $APP_IMAGE $APP_RELEASE_IMAGE
+        - docker push $APP_RELEASE_IMAGE
+        - docker push $APP_IMAGE
+    <<: *require_image
+
+Publish images:
+    stage: publish
+    when: on_success
+    image:
+        name: amazon/aws-cli:2.7.1
+        entrypoint: [""]
+    tags:
+        - docker
+    before_script:
+        - amazon-linux-extras install docker
+        - aws --version
+        - docker --version
+    script:
+        - *load_image
+        - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
+        - docker tag $APP_IMAGE $AWS_ECR_IMAGE
+        - docker push $AWS_ECR_IMAGE
+    <<: *require_image
+    only:
+        - master

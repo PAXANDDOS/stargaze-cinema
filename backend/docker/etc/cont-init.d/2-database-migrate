@@ -1,0 +1,19 @@
+#!/command/with-contenv sh
+
+printf "\n💾 Checking database...\n"
+
+if /var/www/stargaze/bin/console -n doctrine:database:create &>/dev/null; then
+    printf "\n 💾 Successfully created database.\n\n"
+else
+    printf "\n💾 Database already exists or connection aborted.\n\n"
+fi
+
+printf "\n💾 Running migrations...\n"
+
+if /var/www/stargaze/bin/console -n doctrine:migrations:migrate &>/dev/null; then
+    printf "\n💾 Migration successful!\n\n"
+    exit 0
+else
+    printf "\n💾 Could not run migrations!\n\n"
+    exit 1
+fi

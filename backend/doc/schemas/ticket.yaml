@@ -1,0 +1,14 @@
+type: object
+properties:
+    id:
+        type: integer
+    place:
+        type: integer
+    user_id:
+        type: integer
+    session_id:
+        type: integer
+    created_at:
+        type: string
+    updated_at:
+        type: string

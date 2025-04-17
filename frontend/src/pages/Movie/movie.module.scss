@@ -1,0 +1,16 @@
+.moviePage {
+    @include flex-column;
+    align-items: center;
+    background: $white-0;
+    width: 100vw;
+    min-height: calc(100vh - 64px);
+    z-index: 1;
+
+    .movieBody {
+        @include flex-column;
+        align-items: center;
+        width: calc(100% - 460px);
+        min-width: 600px;
+        background: $white-1;
+    }
+}

@@ -1,0 +1,33 @@
+.paginator {
+    @include flex-row;
+    @include unselectable;
+    justify-content: center;
+    align-items: center;
+    min-width: fit-content;
+    width: fit-content;
+    height: 40px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: $shadow-lighten;
+    font-size: 14px;
+
+    button {
+        width: 32px;
+        height: inherit;
+
+        @include transition;
+        &:hover {
+            background: $white-2;
+        }
+        &:disabled {
+            opacity: 0.4;
+        }
+    }
+    span {
+        @include grid-center;
+        width: 32px;
+        height: inherit;
+        font-weight: 600;
+    }
+}

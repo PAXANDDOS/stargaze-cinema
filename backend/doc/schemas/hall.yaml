@@ -1,0 +1,14 @@
+type: object
+properties:
+    id:
+        type: integer
+    name:
+        type: string
+    capacity:
+        type: integer
+    type:
+        enum: [2D, 3D, 'IMAX 3D', 4DX, 5D]
+    created_at:
+        type: string
+    updated_at:
+        type: string

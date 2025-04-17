@@ -1,0 +1,10 @@
+required:
+    - title
+    - price
+    - year
+    - runtime
+    - rating
+    - language_id
+    - country_ids
+    - genre_ids
+    - director_ids

@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+    title: Stargaze Cinema API documentation
+    version: 1.2.0
+servers:
+    - url: http://localhost:8000
+tags:
+    - name: Auth
+    - name: Movie
+    - name: Frame
+    - name: Genre
+    - name: Director
+    - name: Hall
+    - name: Session
+    - name: Ticket
+    - name: User
+paths:
+    /api/auth/signin:
+        $ref: './resources/auth.yaml#/SignIn'
+    /api/auth/signup:
+        $ref: './resources/auth.yaml#/SignUp'
+    /api/movies:
+        $ref: './resources/movie.yaml#/Movie'
+    /api/movies/{id}:
+        $ref: './resources/movie.yaml#/MovieWithID'
+    /api/movies/{id}/frames:
+        $ref: './resources/movie.yaml#/MovieFrames'
+    /api/genres:
+        $ref: './resources/genre.yaml#/Genre'
+    /api/genres/{id}:
+        $ref: './resources/genre.yaml#/GenreWithID'
+    /api/directors:
+        $ref: './resources/director.yaml#/Director'
+    /api/directors/{id}:
+        $ref: './resources/director.yaml#/DirectorWithID'
+    /api/frames:
+        $ref: './resources/frame.yaml#/Frame'
+    /api/frames/{id}:
+        $ref: './resources/frame.yaml#/FrameWithID'
+    /api/halls:
+        $ref: './resources/hall.yaml#/Hall'
+    /api/halls/{id}:
+        $ref: './resources/hall.yaml#/HallWithID'
+    /api/sessions:
+        $ref: './resources/session.yaml#/Session'
+    /api/sessions/{id}:
+        $ref: './resources/session.yaml#/SessionWithID'
+    /api/tickets:
+        $ref: './resources/ticket.yaml#/Ticket'
+    /api/tickets/{id}:
+        $ref: './resources/ticket.yaml#/TicketWithID'
+    /api/users:
+        $ref: './resources/user.yaml#/User'
+    /api/users/{id}:
+        $ref: './resources/user.yaml#/UserWithID'
+
+components:
+    schemas:
+        Movie:
+            $ref: './schemas/movie.yaml'
+        Frame:
+            $ref: './schemas/frame.yaml'
+        Genre:
+            $ref: './schemas/genre.yaml'
+        Directors:
+            $ref: './schemas/directors.yaml'
+        Hall:
+            $ref: './schemas/hall.yaml'
+        Session:
+            $ref: './schemas/session.yaml'
+        Ticket:
+            $ref: './schemas/ticket.yaml'
+        User:
+            $ref: './schemas/user.yaml'
+    securitySchemes:
+        BearerAuth:
+            $ref: './schemas/security.yaml'

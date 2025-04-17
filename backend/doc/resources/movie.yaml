@@ -1,0 +1,141 @@
+Movie:
+    get:
+        tags:
+            - Movie
+        summary: Get all movies
+        security:
+            - BearerAuth: []
+        responses:
+            200:
+                description: List of movies
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "../schemas/movie.yaml"
+    post:
+        tags:
+            - Movie
+        summary: Create movie
+        security:
+            - BearerAuth: []
+        requestBody:
+            content:
+                multipart/form-data:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/movie.yaml"
+                            - $ref: "../schemas/required/movie.yaml"
+                            - $ref: "../examples/movie.yaml"
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/movie.yaml"
+                            - $ref: "../schemas/required/movie.yaml"
+                            - $ref: "../examples/movie.yaml"
+        responses:
+            201:
+                $ref: "../responses/movie.yaml"
+                description: Movie created
+
+MovieWithID:
+    get:
+        tags:
+            - Movie
+        summary: Get movie by ID
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            200:
+                $ref: "../responses/movie.yaml"
+                description: Movie found
+    patch:
+        tags:
+            - Movie
+        summary: Update movie
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        requestBody:
+            content:
+                multipart/form-data:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/movie.yaml"
+                            - $ref: "../examples/movie.yaml"
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/movie.yaml"
+                            - $ref: "../examples/movie.yaml"
+        responses:
+            201:
+                $ref: "../responses/movie.yaml"
+                description: Movie updated
+    delete:
+        tags:
+            - Movie
+        summary: Delete movie
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            204:
+                description: Movie deleted
+
+MovieFrames:
+    post:
+        tags:
+            - Movie
+        summary: Add frames to the movie
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        requestBody:
+            content:
+                multipart/form-data:
+                    schema:
+                        type: object
+                        required:
+                            - image
+                        properties:
+                            image:
+                                type: string
+                            image1:
+                                type: string
+                            image2:
+                                type: string
+                        example:
+                            image: https://cdn.stargazecinema/movies/Avengers/frame1.png
+                            image1: https://cdn.stargazecinema/movies/Avengers/frame2.png
+                            image2: https://cdn.stargazecinema/movies/Avengers/frame3.png
+        responses:
+            201:
+                $ref: ../responses/frame.yaml
+                description: Frames added

@@ -1,0 +1,37 @@
+.formModal {
+    form {
+        @include flex-column;
+        width: 100%;
+        padding: 0 20px 0 20px;
+        background: $white-2;
+
+        .formPoster {
+            width: 100%;
+            height: fit-content;
+            @include flex-column;
+            justify-content: center;
+
+            img {
+                border-radius: 8px;
+                width: 200px;
+                width: 300px;
+            }
+
+            input {
+                opacity: 0;
+            }
+
+            label {
+                @include flex-center;
+                width: 300px;
+                height: 40px;
+                color: $brand-blue;
+                border: 1px solid $dark-8;
+                background: $white-1;
+                border-radius: 6px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+type: object
+properties:
+    id:
+        type: integer
+    begin_at:
+        type: string
+    end_at:
+        type: string
+    movie_id:
+        type: integer
+    hall_id:
+        type: integer
+    created_at:
+        type: string
+    updated_at:
+        type: string

@@ -1,0 +1,15 @@
+description: Signed in successfully
+content:
+    application/json:
+        schema:
+            type: object
+            properties:
+                token:
+                    type: object
+                    properties:
+                        value:
+                            type: string
+                        ttl:
+                            type: number
+                user:
+                    $ref: '../schemas/user.yaml'

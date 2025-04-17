@@ -1,0 +1,38 @@
+.footer {
+    @include flex-center;
+    flex-direction: row;
+    width: 100vw;
+    height: 160px;
+    background: $white-1;
+    margin-top: 32px;
+
+    .footerLogo {
+        @include unselectable;
+        margin: 0 24px;
+        text-align: center;
+    }
+
+    .footerBtn {
+        @include grid-center;
+        @include unselectable;
+        padding: 10px;
+        border: 1px solid $dark-4;
+        border-radius: 50px;
+        color: $dark-2;
+        fill: $dark-2;
+        font-weight: 600;
+        font-size: large;
+        margin: 0 10px;
+        cursor: pointer;
+
+        @include transition;
+        &:hover {
+            border-color: $brand-blue;
+            color: $brand-blue;
+            fill: $brand-blue;
+        }
+        &:active {
+            opacity: 0.75;
+        }
+    }
+}

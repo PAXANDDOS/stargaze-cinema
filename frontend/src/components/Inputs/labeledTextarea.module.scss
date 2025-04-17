@@ -1,0 +1,23 @@
+.labeledTextarea {
+    @include flex-column;
+    width: 100%;
+    font-size: medium;
+    margin-top: 6px;
+    margin-bottom: 10px;
+
+    textarea {
+        resize: vertical;
+        width: 100%;
+        height: 200px;
+        border: 1px solid $dark-8;
+        border-radius: 6px;
+        padding: 8px;
+        font-size: inherit;
+        background: $white-1;
+
+        @include transition;
+        &:focus {
+            border-color: $brand-blue;
+        }
+    }
+}

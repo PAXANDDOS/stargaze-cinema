@@ -1,0 +1,5 @@
+required:
+    - begin_at
+    - end_at
+    - movie_id
+    - hall_id

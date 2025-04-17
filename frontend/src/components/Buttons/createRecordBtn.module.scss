@@ -1,0 +1,20 @@
+.createRecord {
+    @include flex-center;
+    width: fit-content;
+    height: 100%;
+    padding: 0 16px;
+    background: $brand-blue;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: $shadow-lighten;
+    color: white;
+    svg {
+        margin-right: 10px;
+    }
+
+    @include transition;
+    &:hover {
+        background: darken($brand-blue, 5%);
+    }
+}

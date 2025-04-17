@@ -1,0 +1,69 @@
+.modalContainer {
+    @include flex-center;
+    @include fade-in(0.16s);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    .modalOverlay {
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background: black;
+        opacity: 0.7;
+        position: absolute;
+    }
+    .modalContent {
+        @include flex-column;
+        @include pop-in(0.16s);
+        min-width: 460px;
+        min-height: 560px;
+        width: 50%;
+        height: 80%;
+        max-height: calc(100vh - 40px);
+        background: $white-2;
+        border-radius: 6px;
+        z-index: 3;
+        box-shadow: $shadow-darken;
+        overflow: hidden;
+        margin: 40px 0;
+        .modalHeader {
+            @include flex-row;
+            @include unselectable;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 20px;
+            margin: 18px 0 10px 0;
+            padding: 0 14px;
+            .modalTitle {
+                font-weight: 700;
+                font-size: 22px;
+            }
+            .modalCloseBtn {
+                height: 100%;
+                svg {
+                    @include flex-center;
+                    fill: $svg;
+                    @include transition;
+                    &:hover {
+                        fill: $brand-blue;
+                    }
+                }
+            }
+        }
+        .modalBody {
+            width: 100%;
+            height: calc(100% - 20px);
+            overflow-y: scroll;
+            padding: 14px;
+        }
+    }
+    .popOutAnimation {
+        @include pop-out(0.16s);
+    }
+}
+.fadeOutAnimation {
+    @include fade-out(0.16s);
+}

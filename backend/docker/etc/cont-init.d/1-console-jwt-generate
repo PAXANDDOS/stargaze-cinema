@@ -1,0 +1,16 @@
+#!/command/with-contenv sh
+
+privpem=/var/www/stargaze/config/jwt/private.pem
+
+if [ ! -f $privpem ]; then
+    printf "\n🔐 Generating a JWT SSL keypair...\n\n"
+    /var/www/stargaze/bin/console lexik:jwt:generate-keypair
+    exit 0
+elif [[ $(find "$privpem" -mtime +2 -print) ]]; then
+    printf "\n🔐 JWT SSL keypair is old. Regenerating...\n\n"
+    /var/www/stargaze/bin/console -n lexik:jwt:generate-keypair --overwrite
+    exit 0
+else
+    printf "\n🔐 JWT SSL generation not needed\n\n"
+    exit 0
+fi

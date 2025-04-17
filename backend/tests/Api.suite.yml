@@ -1,0 +1,14 @@
+actor: ApiTester
+suite_namespace: App\Tests\Api
+modules:
+  enabled:
+    - Symfony:
+        app_path: src
+        var_path: var
+        environment: test
+    - REST:
+        url: /api
+        depends: Symfony
+    - Doctrine2:
+        depends: Symfony
+        cleanup: true

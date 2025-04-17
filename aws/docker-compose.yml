@@ -1,0 +1,75 @@
+version: "3.9"
+
+networks:
+    stargaze-network:
+        name: stargaze-network
+        driver: bridge
+
+services:
+    frontend:
+        container_name: stargaze-cinema
+        image: $AWS_ECR_REGISTRY/stargaze-cinema:latest
+        restart: always
+        ports:
+            - 80:80
+        networks:
+            - stargaze-network
+
+    backend:
+        container_name: stargaze-cinema-api
+        image: $AWS_ECR_REGISTRY/stargaze-cinema-api:latest
+        restart: always
+        ports:
+            - 8000:80
+        volumes:
+            - .env.backend:/var/www/stargaze/.env:ro
+        networks:
+            - stargaze-network
+        depends_on:
+            postgres:
+                condition: service_healthy
+
+    postgres:
+        container_name: postgres
+        image: postgres:14.3-alpine3.15
+        restart: always
+        ports:
+            - 5432:5432
+        env_file:
+            - .env.database
+        healthcheck:
+            test: [ CMD-SHELL, pg_isready, -U, $POSTGRES_USER, -d, $POSTGRES_DB ]
+            interval: 30s
+            timeout: 60s
+            retries: 5
+            start_period: 80s
+        volumes:
+            - pg-storage:/var/lib/postgresql/data:rw
+        networks:
+            - stargaze-network
+
+    rabbitmq:
+        container_name: rabbitmq
+        image: rabbitmq:3.10.2-alpine
+        ports:
+            - 5672:5672
+        restart: always
+        healthcheck:
+            test: "rabbitmq-diagnostics -q ping"
+            interval: 30s
+            timeout: 60s
+            retries: 5
+            start_period: 80s
+        volumes:
+            - rabbitmq-storage:/var/lib/rabbitmq:rw
+            - ./rabbitmq.conf:/etc/rabbitmq/conf.d/10-defaults.conf:ro
+        networks:
+            - stargaze-network
+
+volumes:
+    pg-storage:
+        name: pg-storage
+        driver: local
+    rabbitmq-storage:
+        name: rabbitmq-storage
+        driver: local

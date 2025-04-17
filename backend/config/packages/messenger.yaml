@@ -1,0 +1,28 @@
+framework:
+    messenger:
+        failure_transport: failed
+        transports:
+            failed:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    table_name: failed_messages
+            async:
+                dsn: '%env(RABBITMQ_DSN)%'
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+                options:
+                    exchange:
+                        name: email_notifications
+                        type: fanout
+                    queues:
+                        email_notifications: ~
+        routing:
+            App\Message\EmailNotification: async
+
+when@test:
+   framework:
+       messenger:
+           transports:
+               async: 'in-memory://'

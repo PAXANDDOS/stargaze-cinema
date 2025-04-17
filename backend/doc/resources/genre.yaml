@@ -1,0 +1,93 @@
+Genre:
+    get:
+        tags:
+            - Genre
+        summary: Get all genres
+        security:
+            - BearerAuth: []
+        responses:
+            200:
+                description: List of genres
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "../schemas/genre.yaml"
+    post:
+        tags:
+            - Genre
+        summary: Create genre
+        security:
+            - BearerAuth: []
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/genre.yaml"
+                            - $ref: "../schemas/required/genre.yaml"
+                            - $ref: "../examples/genre.yaml"
+        responses:
+            201:
+                $ref: "../responses/genre.yaml"
+                description: Genre created
+
+GenreWithID:
+    get:
+        tags:
+            - Genre
+        summary: Get genre by ID
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            200:
+                $ref: "../responses/genre.yaml"
+                description: Genre found
+    patch:
+        tags:
+            - Genre
+        summary: Update genre
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        allOf:
+                            - $ref: "../schemas/genre.yaml"
+                            - $ref: "../examples/genre.yaml"
+        responses:
+            201:
+                $ref: "../responses/genre.yaml"
+                description: Genre updated
+    delete:
+        tags:
+            - Genre
+        summary: Delete genre
+        security:
+            - BearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+              type: string
+              example: "1"
+        responses:
+            204:
+                description: Genre deleted
